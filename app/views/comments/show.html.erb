@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Case Number : <%= @comment.case_number %></h1>
+<p><%= @comment.store.store_number %> Incident Date: <%= @comment.visit_date.strftime("%m/%d/%Y") %> Time: <%= @comment.visit_time.strftime("%I:%M %p") %> Status: <%= @comment.status %> <br>
+    Guest: <%= @comment.guest.first_name + " " + @comment.guest.last_name %> Phone: <%= @comment.guest.phone %> Email: <%= @comment.guest.email %><br>
+     Main Issue: <%= @comment.first_issue %> # Updates <%= %> <br>
+    Issue Details: <%= @comment.first_issue_comment %> </p>
+<%# This is where comment_update section goes back %>
+
+<% if session[:position] == "Office" %>
+    <% if @comment.status == "Open" %>
+        <button class="button button-light"><%= link_to 'Edit Comment', edit_comment_path(@comment) %></button>
+        <button class="button button-light"><%= link_to 'Update Comment', new_comment_comment_update_path(@comment) %></button>
+    <% end %>
+    <button class="button button-light"><%= link_to 'Remove Comment', comment_path(@comment), method: :delete, data: {confirm: 'Are you sure?' } %></button>
+<% end %>
+
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

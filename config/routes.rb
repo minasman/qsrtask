@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :guests
+  resources :comments
   resources :stores
   root 'sessions#index'
   resources :users

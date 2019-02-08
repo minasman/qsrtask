@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h2><%= @user.first_name + ' ' + @user.last_name %></h2>
+<%= link_to 'Stores', stores_path %> |
+<%= link_to 'Users', users_path %> |
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
