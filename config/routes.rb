@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comment_updates
   resources :guests
   resources :comments
   resources :stores

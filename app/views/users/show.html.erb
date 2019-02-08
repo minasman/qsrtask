@@ -1,6 +1,51 @@
 <p id="notice"><%= notice %></p>
-<h2><%= @user.first_name + ' ' + @user.last_name %></h2>
-<%= link_to 'Stores', stores_path %> |
-<%= link_to 'Users', users_path %> |
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+    <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title text-center">Users</h5>
+                <div class="col">
+                    <%= link_to 'All Users', users_path, :class => "btn btn-primary" %> |
+                    <%= link_to 'Add User', new_user_path, :class => "btn btn-primary" %> |
+                    <%= link_to 'Edit My Info', edit_user_path(@user), :class => "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title text-center">Comments</h5>
+                <div class="col">
+                    <%= link_to 'All Comments', comments_path, :class => "btn btn-primary" %> |
+                    <%= link_to 'Add Comment', new_comment_path, :class => "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title text-center">Restaurants</h5>
+                <div class="col">
+                    <%= link_to 'All Restaurants', stores_path, :class => "btn btn-primary" %> |
+                    <%= link_to 'Add Restaurant', new_store_path, :class => "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title text-center">Guests</h5>
+                <div class="col">
+                    <%= link_to 'All Guests', guests_path, :class => "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
