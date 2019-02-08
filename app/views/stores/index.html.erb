@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Restaurant List</h1>
+    <div class="row">
+        <% @stores.each do |s| %>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= link_to s.store_number, store_path(s) %> <%= s.name %></h5>
+                            <p class="card-text">Comments - <%=  %> Open <%=  %> Closed<br>
+                                Work Orders - <%=  %> Open <%=  %> Closed<br>
+                                Shop Score - XX% MTD  XX% QTD XX% YTD</p>
+                        </div>
+                    </div>
+                </div>
+        <% end %>
+    </div>
+
+<br>
+
+<%= link_to 'New Store', new_store_path %>

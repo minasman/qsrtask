@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @store.store_number + " " + @store.name %></h1>
+<p>GM: <%= User.find(@store.gm_id).full_name + " Phone: " +  + " Email: " + @store.store_email %><br>
+    Address:  </p>
+
+
+<%= link_to 'Edit', edit_store_path(@store) %> |
+<%= link_to 'Back', stores_path %>

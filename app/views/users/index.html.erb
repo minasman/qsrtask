@@ -1,25 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>User List</h1>
+    <div class="row">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @users.each do |s| %>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><%= s.first_name + "   " + s.last_name %></h5>
+                    <p class="card-text"><%= s.position %> </p>
+                    <a href="users\<%= s.id %>\edit" class="btn btn-primary">Edit User</a>
+                    <a href="#" class="btn btn-primary">Delete User</a>
+                </div>
+            </div>
+        </div>
+<% end %>
+    </div>
 
 <br>
 

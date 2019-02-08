@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stores
   root 'sessions#index'
   resources :users
   get '/signin' => 'sessions#new'

@@ -4,4 +4,8 @@ class User < ApplicationRecord
     has_secure_password
 
     POSITIONS = ["Owner", "Director", "Operations Manager", "Maint Department Head", "Supervisor", "General Manager", "Manager", "Field Tech", "Office"]
+
+    def full_name
+        "#{first_name} #{last_name}"
+    end
 end
