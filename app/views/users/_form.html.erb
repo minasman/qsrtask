@@ -1,0 +1,41 @@
+<%= form_with(model: user, local: true) do |f| %>
+    <div class="form-group">
+        <%= f.label :first_name, "First Name" %>
+            <%= f.text_field :first_name, class: "form-control", required: "true" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :last_name, "Last Name" %>
+            <%= f.text_field :last_name, class: "form-control", required: "true" %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label :position, "Position" %>
+            <%= f.select :position, User::POSITIONS, class: "form-control", required: "true" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :email, "Email Address" %>
+            <%= f.text_field :email, class: "form-control", required: "true" %><br>
+    </div>
+    <div class="form-group">
+        <%= f.label :username, "Create a Username" %>
+            <%= f.text_field :username, class: "form-control", required: "true" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :password, "Create a password" %>
+            <%= f.password_field :password, class: "form-control", required: "true" %><br>
+    </div>
+    <% if user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
