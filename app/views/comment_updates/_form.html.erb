@@ -20,19 +20,3 @@
     <% end %>
 <% end %>
 
-  <% if comment_update.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment_update.errors.count, "error") %> prohibited this comment_update from being saved:</h2>
-
-      <ul>
-      <% comment_update.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :comment_updates
   resources :guests
-  resources :comments
+  resources :comments do
+    resources :comment_updates, only: [:new, :create, :index]
+  end
   resources :stores
   root 'sessions#index'
   resources :users

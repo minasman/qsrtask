@@ -2,8 +2,8 @@ class Comment < ApplicationRecord
     belongs_to :store
     belongs_to :user
     belongs_to :guest
-    # has_many :comment_updates
-    # accepts_nested_attributes_for :comment_updates
+    has_many :comment_updates
+    accepts_nested_attributes_for :comment_updates
     validates :case_number, uniqueness: true
 
     COMMENT_TYPES = ["Complaint", "Compliment", "Inquiry"]
