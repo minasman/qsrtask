@@ -12,6 +12,8 @@
                 <th scope="col">Issue</th>
                 <th scope="col">Source</th>
                 <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Updates</th>
                 <th scope="col">Days Open</th>
             </tr>
         </thead>
@@ -27,6 +29,8 @@
                     <td><%= c.first_issue %></td>
                     <td><%= c.source %></td>
                     <td><%= c.comment_type %></td>
+                    <td><%= c.status %></td>
+                    <td><%= c.comment_updates.count %></td>
                     <td><%= Integer((Time.now - c.created_at)/86400) %></td>
                 </tr>
                 <% i = i + 1 %>

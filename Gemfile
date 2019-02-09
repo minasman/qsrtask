@@ -30,6 +30,8 @@ gem 'dotenv-rails'
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'jquery-rails'
 gem 'pry'
+gem 'faker'
+
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :require_log_in
+  # before_action :require_log_in
 
   # GET /comments
   # GET /comments.json
