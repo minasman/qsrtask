@@ -1,0 +1,40 @@
+<% i = 1 %>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Store</th>
+                <th scope="col">Case Number</th>
+                <th scope="col">Date Received</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Issue</th>
+                <th scope="col">Source</th>
+                <th scope="col">Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Updates</th>
+                <th scope="col">Days Open</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @comments.each do |c| %>
+                <tr>
+                    <th scope="row"><%= i %></th>
+                    <td><%= c.store.store_number %></td>
+                    <td><%=link_to c.case_number, comment_path(c) %></td>
+                    <td><%= c.visit_date.strftime("%m/%d/%Y") %></td>
+                    <td><%= c.guest.first_name + " " + c.guest.last_name %></td>
+                    <td><%= c.guest.phone %></td>
+                    <td><%= c.first_issue %></td>
+                    <td><%= c.source %></td>
+                    <td><%= c.comment_type %></td>
+                    <td><%= c.status %></td>
+                    <td><%= c.comment_updates.count %></td>
+                    <td><%= Integer((Time.now - c.created_at)/86400) %></td>
+                </tr>
+                <% i = i + 1 %>
+            <% end %>
+        </tbody>
+    </table>
+</div>

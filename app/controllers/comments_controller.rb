@@ -1,3 +1,4 @@
+require 'pry'
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   # before_action :require_log_in
@@ -61,6 +62,22 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_path(session[:user_id]), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def open
+    @comments = Comment.where("status"=>"Open").order("store_id").order("source")
+    respond_to do |format|
+      format.html
+      format.json { render json: @comments}
+    end
+  end
+
+  def guest_comments
+    @comments = Comment.where("store_id"=>params[:store]).where("guest_id"=> params[:id])
+    respond_to do |format|
+      format.html
+      format.json {render json: @comments}
     end
   end
 

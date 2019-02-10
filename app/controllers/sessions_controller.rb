@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
             session[:user_id] = @user.id
             session[:position] = @user.position
             session[:user_name] = @user.first_name + " " + @user.last_name
-            redirect_to @user, notice: 'User was successfully Logged In'
+            redirect_to @user
         else
             flash.alert = "Username and/or Password Not Found"
             redirect_to signin_path, notice: 'User Not Found'
