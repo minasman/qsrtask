@@ -4,7 +4,7 @@
 <% @guests.each do |g| %>
 <table>
     <tr>
-      <th colspan="2" ><%= g.full_name + ' Phone:' + g.phone %></th>
+      <th colspan="2" ><%=link_to g.full_name , guest_comments_path("id"=>g.id) %> <%='Phone:' + g.phone %></th>
     </tr>
   <tr>
     <th>Store</th>
@@ -13,7 +13,7 @@
       <% g.stores.map do |s| %>
         <tr>
           <td><%= s.store_number %></td>
-          <td><%= link_to s.comments.where("store_id" => s.id).count, guest_comments_path("id"=>g.id, "store"=>s.id) %></td>
+          <td><%= link_to s.comments.where("store_id" => s.id).where("guest_id"=>g.id).count, guest_comments_path("id"=>g.id, "store"=>s.id) %></td>
         </tr>
       <% end %>
   </table>

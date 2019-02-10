@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users
   get '/open' => 'comments#open'
   get '/guest_comments' => 'comments#guest_comments'
+  get '/find_comment' => 'comments#find'
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   get '/logout' => 'sessions#destroy'

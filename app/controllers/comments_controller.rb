@@ -66,15 +66,28 @@ class CommentsController < ApplicationController
   end
 
   def open
-    @comments = Comment.where("status"=>"Open").order("store_id").order("source")
+    @comments = Comment.where("status"=>"Open").order("store_id").order("source").order("visit_date")
     respond_to do |format|
       format.html
       format.json { render json: @comments}
     end
   end
 
+  def find
+    @comment = Comment.find_by("case_number": params[:case_number])
+    # binding.pry
+    respond_to do |format|
+      format.html { redirect_to comment_path(@comment.id)}
+      format.json {render json: @comment}
+    end
+  end
+
   def guest_comments
-    @comments = Comment.where("store_id"=>params[:store]).where("guest_id"=> params[:id])
+    if params[:store]
+      @comments = Comment.where("store_id"=>params[:store]).where("guest_id"=> params[:id]).order("visit_date")
+    else
+      @comments = Comment.where("guest_id"=> params[:id]).order("store_id").order("visit_date")
+    end
     respond_to do |format|
       format.html
       format.json {render json: @comments}

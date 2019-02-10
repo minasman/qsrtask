@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
-    <div class="col-md-6">
-        <div class="card" >
+<div class="row" >
+    <div class="col" style="margin-bottom: 10px;">
+        <div class="card bg-light" style="height: 100%;">
             <div class="card-body">
                 <h5 class="card-title text-center">Users</h5>
                 <div class="row justify-content-md-center">
@@ -12,14 +12,18 @@
             </div>
         </div>
     </div>
-    <div class="col">
-        <div class="card" >
+    <div class="col" style="margin-bottom: 10px;">
+        <div class="card bg-light" >
             <div class="card-body">
                 <h5 class="card-title text-center">Comments</h5>
                 <div class="row justify-content-md-center">
-                    <%= link_to 'All Comments', comments_path, :class => "btn btn-light" %> |
                     <%= link_to 'Open Comments', open_path, :class => "btn btn-light" %> |
                     <%= link_to 'Add Comment', new_comment_path, :class => "btn btn-light" %>
+                    <%= form_tag("/find_comment", method: "get") do %>
+                        <%= label_tag(:case_number, "Case Number:") %>
+                        <%= text_field_tag(:case_number) %>
+                        <%= submit_tag("Search") %>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -27,7 +31,7 @@
 </div>
 <div class="row">
     <div class="col">
-        <div class="card" >
+        <div class="card bg-light" >
             <div class="card-body">
                 <h5 class="card-title text-center">Restaurants</h5>
                 <div class="row justify-content-md-center">
@@ -38,7 +42,7 @@
         </div>
     </div>
     <div class="col">
-        <div class="card" >
+        <div class="card bg-light" >
             <div class="card-body">
                 <h5 class="card-title text-center">Guests</h5>
                 <div class="row justify-content-md-center">
