@@ -6,6 +6,9 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
+    if session[:authority] === 4 || session[:authority] === 5
+      redirect_to user_path(session[:user_id])
+    end
     @comments = Comment.all
   end
 
@@ -16,17 +19,29 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     @comment = Comment.new
     @comment.guest = Guest.new
   end
 
   # GET /comments/1/edit
   def edit
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
   end
 
   # POST /comments
   # POST /comments.json
   def create
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     @comment = Comment.new(comment_params)
     @comment.user_id = session[:user_id]
 
@@ -44,6 +59,9 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to user_path(session[:user_id]), notice: 'Comment was successfully updated.' }
@@ -58,6 +76,9 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to user_path(session[:user_id]), notice: 'Comment was successfully destroyed.' }

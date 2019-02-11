@@ -13,7 +13,21 @@ class SessionsController < ApplicationController
         if @user.try(:authenticate, params[:user][:password])
             session[:user_id] = @user.id
             session[:position] = @user.position
-            session[:user_name] = @user.first_name + " " + @user.last_name
+            session[:user_name] = @user.full_name
+            if @user.position === "Owner" || @user.position === "Director"
+                session[:authority] = 1
+            elsif @user.position === "Operations Manager" || @user.position === "Supervisor"
+                session[:authority] = 2
+            elsif @user.position === "General Manager" || @user.position === "Manager"
+                session[:authority] = 3
+            elsif @user.position === "Maint Department Head"
+                session[:authority] = 4
+            elsif @user.position === "Field Tech"
+                session[:authority] = 5
+            elsif @user.position === "Office"
+                session[:authority] = 6
+            else session[:authority] = 0
+            end
             redirect_to @user
         else
             flash.alert = "Username and/or Password Not Found"

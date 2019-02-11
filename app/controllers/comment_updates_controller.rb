@@ -5,6 +5,9 @@ class CommentUpdatesController < ApplicationController
   # GET /comment_updates
   # GET /comment_updates.json
   def index
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
   end
 
   # GET /comment_updates/1
@@ -14,16 +17,25 @@ class CommentUpdatesController < ApplicationController
 
   # GET /comment_updates/new
   def new
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     @comment.comment_updates.build
   end
 
   # GET /comment_updates/1/edit
   def edit
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
   end
 
   # POST /comment_updates
   # POST /comment_updates.json
   def create
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     @comment_update = @comment.comment_updates.create(comment_params)
     @comment_update.user_id = session[:user_id]
     if params[:comment_update][:status] && params[:comment_update][:status] == "Closed"
@@ -44,6 +56,9 @@ class CommentUpdatesController < ApplicationController
   # PATCH/PUT /comment_updates/1
   # PATCH/PUT /comment_updates/1.json
   def update
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     respond_to do |format|
       if @comment_update.update(comment_update_params)
         format.html { redirect_to @comment_update, notice: 'Comment update was successfully updated.' }
@@ -58,6 +73,9 @@ class CommentUpdatesController < ApplicationController
   # DELETE /comment_updates/1
   # DELETE /comment_updates/1.json
   def destroy
+    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
+      redirect_to user_path(session[:user_id])
+    end
     @comment_update.destroy
     respond_to do |format|
       format.html { redirect_to comment_updates_url, notice: 'Comment update was successfully destroyed.' }
