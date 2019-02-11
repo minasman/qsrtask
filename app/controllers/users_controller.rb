@@ -97,13 +97,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    def is_admin
-      if session[:authority] === 1 || session[:authority] === 6
-        return true
-      else
-        return false
-      end
-    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params

@@ -1,15 +1,15 @@
-require 'pry'
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  # before_action :require_log_in
+  before_action :require_log_in
 
   # GET /comments
   # GET /comments.json
   def index
-    if session[:authority] === 4 || session[:authority] === 5
-      redirect_to user_path(session[:user_id])
+    if is_admin || is_ops
+      @comments = Comment.all
+    else
+      redirect_to user_path(session[:user_id]) and return
     end
-    @comments = Comment.all
   end
 
   # GET /comments/1
@@ -19,8 +19,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
-      redirect_to user_path(session[:user_id])
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
     end
     @comment = Comment.new
     @comment.guest = Guest.new
@@ -28,19 +28,16 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
-      redirect_to user_path(session[:user_id])
-    end
-    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
-      redirect_to user_path(session[:user_id])
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
     end
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
-      redirect_to user_path(session[:user_id])
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
     end
     @comment = Comment.new(comment_params)
     @comment.user_id = session[:user_id]
@@ -59,8 +56,8 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
-      redirect_to user_path(session[:user_id])
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
     end
     respond_to do |format|
       if @comment.update(comment_params)
@@ -76,8 +73,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
-    if session[:authority] != 1 || session[:authority] != 2 || session[:authority] != 6
-      redirect_to user_path(session[:user_id])
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
     end
     @comment.destroy
     respond_to do |format|
@@ -87,16 +84,19 @@ class CommentsController < ApplicationController
   end
 
   def open
-    @comments = Comment.where("status"=>"Open").order("store_id").order("source").order("visit_date")
-    respond_to do |format|
-      format.html
-      format.json { render json: @comments}
+    if is_admin || is_ops
+      @comments = Comment.where("status"=>"Open").order("store_id").order("source").order("visit_date")
+      respond_to do |format|
+        format.html
+        format.json { render json: @comments}
+      end
+    else
+      redirect_to user_path(session[:user_id]) and return
     end
   end
 
   def find
     @comment = Comment.find_by("case_number": params[:case_number])
-    # binding.pry
     respond_to do |format|
       format.html { redirect_to comment_path(@comment.id)}
       format.json {render json: @comment}
@@ -104,14 +104,18 @@ class CommentsController < ApplicationController
   end
 
   def guest_comments
-    if params[:store]
-      @comments = Comment.where("store_id"=>params[:store]).where("guest_id"=> params[:id]).order("visit_date")
+    if is_admin || is_ops
+      if params[:store]
+        @comments = Comment.where("store_id"=>params[:store]).where("guest_id"=> params[:id]).order("visit_date")
+      else
+        @comments = Comment.where("guest_id"=> params[:id]).order("store_id").order("visit_date")
+      end
+      respond_to do |format|
+        format.html
+        format.json {render json: @comments}
+      end
     else
-      @comments = Comment.where("guest_id"=> params[:id]).order("store_id").order("visit_date")
-    end
-    respond_to do |format|
-      format.html
-      format.json {render json: @comments}
+      redirect_to user_path(session[:user_id]) and return
     end
   end
 
