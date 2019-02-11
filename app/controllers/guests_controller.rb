@@ -5,19 +5,20 @@ class GuestsController < ApplicationController
   # GET /guests
   # GET /guests.json
   def index
-
-    @guests = Guest.all
+    if is_admin || is_ops
+      @guests = Guest.all
+    else
+      redirect_to user_path(session[:user_id]) and return
+    end
   end
 
   # GET /guests/1
   # GET /guests/1.json
   def show
-
   end
 
   # GET /guests/new
   def new
-
     @guest = Guest.new
   end
 

@@ -14,28 +14,33 @@ class StoresController < ApplicationController
 
   # GET /stores/new
   def new
-
-    @store = Store.new
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
+    end
   end
 
   # GET /stores/1/edit
   def edit
-
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
+    end
   end
 
   # POST /stores
   # POST /stores.json
   def create
-
-    @store = Store.new(store_params)
-
-    respond_to do |format|
-      if @store.save
-        format.html { redirect_to @store, notice: 'Store was successfully created.' }
-        format.json { render :show, status: :created, location: @store }
-      else
-        format.html { render :new }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
+    else
+      @store = Store.new(store_params)
+      respond_to do |format|
+        if @store.save
+          format.html { redirect_to @store, notice: 'Store was successfully created.' }
+          format.json { render :show, status: :created, location: @store }
+        else
+          format.html { render :new }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -43,14 +48,17 @@ class StoresController < ApplicationController
   # PATCH/PUT /stores/1
   # PATCH/PUT /stores/1.json
   def update
-
-    respond_to do |format|
-      if @store.update(store_params)
-        format.html { redirect_to @store, notice: 'Store was successfully updated.' }
-        format.json { render :show, status: :ok, location: @store }
-      else
-        format.html { render :edit }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
+    else
+      respond_to do |format|
+        if @store.update(store_params)
+          format.html { redirect_to @store, notice: 'Store was successfully updated.' }
+          format.json { render :show, status: :ok, location: @store }
+        else
+          format.html { render :edit }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -58,11 +66,14 @@ class StoresController < ApplicationController
   # DELETE /stores/1
   # DELETE /stores/1.json
   def destroy
-
-    @store.destroy
-    respond_to do |format|
-      format.html { redirect_to stores_url, notice: 'Store was successfully destroyed.' }
-      format.json { head :no_content }
+    if !is_admin
+      redirect_to user_path(session[:user_id]) and return
+    else
+      @store.destroy
+      respond_to do |format|
+        format.html { redirect_to stores_url, notice: 'Store was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
