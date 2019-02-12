@@ -36,7 +36,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
+    <div class="col" style="margin-bottom: 10px;">
         <div class="card text-dark" style="height: 100%;background-color: #EEECE0;" >
             <div class="card-body" style="box-shadow: 6px 8px 6px black;">
                 <h5 class="card-title text-center">Restaurants</h5>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <% if session[:authority] === 1 || session[:authority] === 2 || session[:authority] === 3 || session[:authority] === 6 %>
-        <div class="col">
+        <div class="col" style="margin-bottom: 10px;">
             <div class="card text-dark" style="height: 100%;background-color: #EEECE0;"  >
                 <div class="card-body" style="box-shadow: 6px 8px 6px black;">
                     <h5 class="card-title text-center">Guests</h5>
@@ -62,5 +62,16 @@
         </div>
     <% end %>
 </div>
-
-
+<div class="row">
+    <div class="col">
+        <div class="card text-dark" style="height: 100%;background-color: #EEECE0;" >
+            <div class="card-body" style="box-shadow: 6px 8px 6px black;">
+                <h5 class="card-title text-center">Shops</h5>
+                <div class="row justify-content-md-center">
+                    <%= link_to 'All Shops', shops_path, :class => "btn btn-light" %>
+                    <%= link_to 'Add Shop', new_shop_path, :class => "btn btn-light" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

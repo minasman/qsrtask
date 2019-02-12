@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if is_admin
+    if is_admin && session[:authority] != 6
       @users = User.all
     else
       redirect_to user_path(session[:user_id]) and return
