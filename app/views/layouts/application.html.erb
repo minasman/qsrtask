@@ -22,7 +22,6 @@
             <li class="nav-item">
               <a class="nav-link" href="/signin">Sign In</a>
             </li>
-
           <% end %>
           <% if logged_in? %>
             <li class="nav-item">
@@ -33,7 +32,8 @@
         <% if logged_in? %>
               <%= session[:user_name] %>
         <% end %>
-      </div>
+        </div>
+
     </nav>
 
     <div class="my-content container">
