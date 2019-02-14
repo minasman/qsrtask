@@ -197,26 +197,26 @@ function donetimer() {
     pftime.value = thepftime;
 }
 
-function attachListeners(){
-    let totalPossible = 0
-    let totalEarned = 0
-    let score = ""
-    $("input[type=radio]").change(function(){
-        totalPossible = $("input[type=radio]:checked").length
-        totalEarned = 0
-        $("input[type=radio]:checked").each(function(){
-            if (this.value === "Yes") {
-                totalEarned++
-                          }
-            if (this.value === "N/A") {
-                totalPossible--
-            }
-            score = totalEarned / totalPossible
-            $('#score').html(`<h1> Possible Points: ${totalPossible} Achieved Points: ${totalEarned} Score: ${parseFloat(score * 100).toPrecision(3)}% </h1>`)
-            document.getElementById('shop_score').value = score
-        })
-    })
-}
+// function attachListeners(){
+//     let totalPossible = 0
+//     let totalEarned = 0
+//     let score = ""
+//     $("input[type=radio]").change(function(){
+//         totalPossible = $("input[type=radio]:checked").length
+//         totalEarned = 0
+//         $("input[type=radio]:checked").each(function(){
+//             if (this.value === "Yes") {
+//                 totalEarned++
+//                           }
+//             if (this.value === "N/A") {
+//                 totalPossible--
+//             }
+//             score = totalEarned / totalPossible
+//             $('#score').html(`<h1> Possible Points: ${totalPossible} Achieved Points: ${totalEarned} Score: ${parseFloat(score * 100).toPrecision(3)}% </h1>`)
+//             document.getElementById('shop_score').value = score
+//         })
+//     })
+// }
 
 function showShopType(){
     let store = ""
