@@ -20,3 +20,23 @@
     left: 15%;
     bottom: 20%;
 }
+.my-shopcontent {
+    position: absolute;
+    top: 8%;
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+.field_with_errors {
+    color: red;
+}
+
+ #score {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+}
+
+.traditional {
+    display: none;
+}

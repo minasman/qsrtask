@@ -15,6 +15,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require popper
+//= require shops/shopform
 //= require bootstrap-sprockets
 
 

@@ -1,4 +1,130 @@
 <p id="notice"><%= notice %></p>
 
+<div id="theShopForm">
+
+    <div id="shopSetup">
+        <h1>Restaurant #<%= @shop.store.store_number %> Date: <%= @shop.shopDate.strftime("%m/%d/%Y") %> at: <%= @shop.shopTime.strftime("%I:%M %p") %></h1>
+        <p>Shopped By: <%= @shop.user.first_name %> Score: <%= (@shop.score.to_f * 100).round(2) %>%<p>
+    </div>
+    <div id="shiftManagment" >
+        <h2>SHIFT MANAGEMENT</h1>
+        <p>Is the shift manager up front and visibly in charge? <%= @shop.upFront %><br>
+            Is the Shift Manager Appearance Acceptable? <%= @shop.mgrAppearance %><br>
+            Is the Shift Manager Wearing a Headset? <%= @shop.headset %><br>
+            Is the Crew Appearance Acceptable? <%= @shop.crewAppearance %><br>
+            Are R2D2 Charts Posted and Current? <%= @shop.r2d2Charts %><br>
+            Are the RDM Boards Current? <%= @shop.rdm %><br>
+            Were Kiosks Staffed and in use? <%= @shop.kiosks %><br>
+            Was Table Service Being Used During Your Visit? <%= @shop.tableService %><br>
+            Are Benefits/Employment Table Tents Visible?<%= @shop.tableTent %></p>
+            <p>COMMENTS:<br>
+                <%= @shop.shiftMgrComment %></p><br>
+    </div>
+    <div id="fast">
+        <h2>FAST</h2>
+        <% if @shop.shopType === "DT" %>
+            <h3>DRIVE-THRU</h3>
+            <p>Enter Wait Time: <%= @shop.waitTime %><br>
+                Enter Response Time: <%= @shop.responseTime %><br>
+                Enter Present Time:  <%= @shop.presentTime %><br>
+                Enter Present Time:  <%= @shop.oepTime %><br>
+                Enter Total Time: <%= @shop.totalTime %><br>
+                Were you pulled forward? <%= @shop.pullForward %><br>
+                Enter how long you were pulled forward: <%= @shop.pullForwardTime %><br>
+                Number of cars between COD & You, include car at COD: <%= @shop.numberCars %><br>
+                If Tandem/HHOT, was second order point in use? <%= @shop.tandem %></p><br>
+        <% end %>
+        <% if @shop.shopType === "FC" %>
+            <h3>FRONT COUNTER</h3>
+            <p>Enter Wait Time: <%= @shop.fcWaitTime %><br>
+                Enter Delivery Time: <%= @shop.fcDeliveryTIme %><br>
+                Enter Total Time: <%= @shop.fcTotalTime %><br>
+                Number of guests ahead of you in line: <%= @shop.numberGuests %><p>
+        <% end %>
+        <p>COMMENTS: <br>
+            <%= @shop.fastComment %></p><br>
+    </div>
+    <div id="accurate">
+        <h1>ACCURATE</h1>
+        <p>Items Ordered: <%= @shop.itemsOrdered %><br>
+            Popcorn Tree Visible with at least half the tree full? <%= @shop.popcornFull %><br>
+            Did you receive all food and drink items that were ordered? <%= @shop.completeOrder %><br>
+            Did you receive all requested condiments? <%= @shop.condiment %><br>
+            Did the condiments come in a condiment bag separate from your order? <%= @shop.condimentBag %><br>
+            Is the Reader Board Message Correct? <%= @shop.readerboard %><br>
+            Is the POP/Marketing Correct? <%= @shop.marketing %><br>
+            Are the 800# signs on the DT Windows? <%= @shop.dtCommentNumber %></p>
+            <p>COMMENTS:<br>
+                <%= @shop.accuracyComment %></p><br>
+    </div>
+    <div id="hospitality">
+        <H1>HOSPITALITY</H1>
+        <p>Did the Order Taker: <%= @shop.otName %><br>
+            PRE-SELL you the appropriate item? <%= @shop.presell %><br>
+            Upsell you to a meal or Lg EVM? <%= @shop.upsell %><br>
+            Repeat you entire order and ask, 'Is that correct?'<%= @shop.repeatOrderAsk %><br>
+            Did the Cashier: <%= @shop.cashierName %><br>
+            Provide a friendly greeting and closing? <%= @shop.cashierGreeting %><br>
+            ASK, 'Did your order include ______?' <%= @shop.cashierAsk %><br>
+            Did the Presenter: <%= @shop.presenterName %><br>
+            Provide a friendly greeting and closing? <%= @shop.presenterGreet %><br>
+            TELL you, 'Here is your order with _____.' <%= @shop.presenterTell %><br>
+            If you were pulled forward, did the pull forward presenter: <%= @shop.pullForwardPresenterName %><br>
+            TELL you, 'Here is your order with _____.' <%= @shop.pfTell %></p>
+        <p>COMMENTS: <br>
+            <%= @shop.hospitalityComment %></p><br>
+    </div>
+    <div id="quality">
+        <h1>QUALITY</h1>
+        <p>Were all products properly prepared and fresh and hot?  Neatly assembled? <%= @shop.fresh %><br>
+            Were fries fresh and properly salted? Hashbrown hot and properly cooked?<%= @shop.friesGood %><br>
+            Did the beverage have good taste?  (Cold/hot, carbonated, prepared correctly,stickered)<%= @shop.drinkGood %></p>
+        <p>COMMENTS: <br>
+            <%= @shop.qualityComment %></p><br>
+    </div>
+    <div id="cleanliness">
+        <h1>CLEANLINESS</h1>
+        <p>Is The COD Area Clean? <%= @shop.codClean %><br>
+            Is the DT Lane Clean? <%= @shop.dtClean %><br>
+            Is the Parking Lot Clean? <%= @shop.lotClean %><br>
+            Is the Corral Clean? <%= @shop.corralClean %><br>
+            Are the Dumpster Lids Closed? <%= @shop.lidsClosed %><br>
+            Are the DT Glass and Frame Clean? <%= @shop.dtGlassClean %><br>
+            Are Lobby Doors and Windows Clean? <%= @shop.windowsClean %><br>
+            Are the outside trash bins full and overflowing? <%= @shop.trashFull %><br>
+            Are the 800# signs on the Entry Doors? <%= @shop.commentSignVisible %><br>
+            Are the Floors Clean? <%= @shop.floorClean %><br>
+            Are the Tables Clean? <%= @shop.tableClean %><br>
+            Is the Beverage Bar Clean? <%= @shop.drinkClean %><br>
+            Was The Top of The Popcorn Machine Clean? <%= @shop.popCornClean %><br>
+            Are Ceiling Vents Clean? <%= @shop.ventsClean %><br>
+            Are Sanitizers Available? <%= @shop.sanitizer %><br>
+            Are the Televisions in the Lobby and Playplace on the correct channels?<%= @shop.tvOn %><br>
+            Are the Televisions in the Lobby on and playing a movie?<%= @shop.tvOn %><br>
+            Are the Restrooms Clean?<%= @shop.restroomClean %><br>
+            Are the trash bins full and overflowing?<%= @shop.insideTrash %><br>
+            Is the Crew Room Clean & Organized?<%= @shop.crewRoom %></p>
+        <p>COMMENT: <br>
+            <%= @shop.cleanComment %></p><br>
+    </div>
+    <div id="foodSafety">
+        <H1>FOOD SAFETY</H1>
+        <p>Are UHC timers being used correctly? <%= @shop.uhcTimer %><br>
+            Are times on the prep table being used and are current? <%= @shop.prepTimer %><br>
+            Are the buns held correctly with times marked? <%= @shop.bunTimer %><br>
+            Are Chicken Tenders Held in The 2 Drawer Correctly? <%= @shop.tenderCorrect %><br>
+            Secondary Shelf Life on Oldest Package: <%= @shop.tenderDate %> at: <%= @shop.tenderTime %><br>
+            Is the HOTG 4:1 Held in the 2 Drawer Cooler Correctly? <%= @shop.qtrCorrect %><br>
+            Secondary Shelf Life on Oldest 4:1 Package: <%= @shop.qtrDate %> at: <%= @shop.qtrTime %><br>
+            Are Glove Procedures Followed in The Grill Area? <%= @shop.glove %><br>
+            Are the pies held correctly with times marked? <%= @shop.pieTimer %><br>
+            Are the salads held correctly with times marked? <%= @shop.saladTimer %></p>
+        <p>COMMENTS: <br>
+            <%= @shop.foodSafetyComment %></p><br>
+    </div>
+</div>
+
+
+
 <%= link_to 'Edit', edit_shop_path(@shop) %> |
 <%= link_to 'Back', shops_path %>

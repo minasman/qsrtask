@@ -16,6 +16,8 @@ class ShopsController < ApplicationController
   # GET /shops/new
   def new
     @shop = Shop.new
+    @wmStores = Store.find_by(store_type: "WM")
+
   end
 
   # GET /shops/1/edit
@@ -26,6 +28,8 @@ class ShopsController < ApplicationController
   # POST /shops.json
   def create
     @shop = Shop.new(shop_params)
+    @shop.user = User.find(session[:user_id])
+
 
     respond_to do |format|
       if @shop.save
@@ -70,6 +74,13 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.fetch(:shop, {})
+      params.require(:shop).permit(:shopDate,:user_id, :shopTime, :store_id, :shopType, :shopper, :upFront, :mgrAppearance, :headset, :crewAppearance, :r2d2Charts, :rdm,
+      :kiosks, :tableService, :tableTent, :shiftMgrComment, :waitTime, :responseTime, :presentTime, :oepTime, :totalTime,
+      :pullForward, :pullForwardTime, :numberCars, :tandem, :fcWaitTime, :fcDeliveryTIme, :fcTotalTime, :numberGuests, :fastComment, :itemsOrdered, :popcornFull,
+      :completeOrder, :condiment, :condimentBag, :readerboard, :marketing, :dtCommentNumber, :accuracyComment, :otName, :presell, :upsell,
+      :repeatOrderAsk, :cashierName, :cashierGreeting, :cashierAsk, :presenterName, :presenterGreet, :presenterTell, :pullForwardPresenterName, :pfTell,
+      :hospitalityComment, :fresh, :friesGood, :drinkGood, :qualityComment, :codClean, :dtClean, :lotClean, :corralClean, :lidsClosed, :dtGlassClean, :windowsClean,
+      :trashFull, :commentSignVisible, :floorClean, :tableClean, :drinkClean, :popCornClean, :ventsClean, :sanitizer, :tvOn, :restroomClean, :insideTrash, :crewRoom,
+      :cleanComment, :uhcTimer, :prepTimer, :bunTimer, :tenderCorrect, :tenderDate, :tenderTime, :qtrDate, :qtrTime, :glove, :pieTimer, :saladTimer, :foodSafetyComment, :score)
     end
 end
