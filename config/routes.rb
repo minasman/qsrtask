@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+  get '/store_type' => 'stores#store_type'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
