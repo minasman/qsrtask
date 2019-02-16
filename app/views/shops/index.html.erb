@@ -1,5 +1,0 @@
-<p id="notice"><%= notice %></p>
-
-<% @shops.each do |s| %>
-  <p><%= link_to s.store.store_number, shop_path(s) %> Shop Score: <%= (s.score.to_f * 100).round(2) %>% </p>
-<% end %>
